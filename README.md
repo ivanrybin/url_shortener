@@ -42,7 +42,7 @@ After successful deployment you can request service by default port `9876` with 
 
 Server and database images setup available in `Dockerfile_server` and `Dockerfile_db` files.
 
-You can build and run server locally without docker with your PostgresSQL database with schema from `db/create-table.sql`. 
+You can build and run server locally without docker with your PostgreSQL database with schema from `db/create-table.sql`. 
 ```bash
 $ ./build_server.sh
 ```
