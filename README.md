@@ -42,7 +42,10 @@ After successful deployment you can request service by default port `9876` with 
 
 Server and database images setup available in `Dockerfile_server` and `Dockerfile_db` files.
 
-You can build and run server locally with your PostgresSQL database with schema from `db/create-table.sql`. 
+You can build and run server locally without docker with your PostgresSQL database with schema from `db/create-table.sql`. 
+```bash
+$ ./build_server.sh
+```
 
 ### Client
 
@@ -133,7 +136,7 @@ message GetResponse {
 alpha = '0123456789_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 alpha_len = 63
 
-sha  = sha256(`input`) # == 32 bytes
+sha  = sha256(input)   # == 32 bytes
 sha  = sha[0:30]       # truncate 32 bytes to first 30 bytes
 
 hash = string(10);     # 10 chars len string
