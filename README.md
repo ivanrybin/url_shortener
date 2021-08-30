@@ -132,7 +132,7 @@ message GetResponse {
 
 **Input**: arbitrary length string `input`.
 
-**Output**: 10 chacharacters `hash` from alphabet `[_0-9a-zA-Z]`.
+**Output**: 10 characters `hash` from alphabet `[_0-9a-zA-Z]`.
 
 ```go
 alpha = '0123456789_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
