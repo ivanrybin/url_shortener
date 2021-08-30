@@ -1,0 +1,19 @@
+server:
+  host:
+  port: 9876
+  lru_size: 10000
+
+
+database:
+  host: database
+  port: 5432
+
+  name: docker
+  user: docker
+  password: docker
+
+  conn_try_time: 5
+  conn_tries_cnt: 10
+
+  max_open_conns: 16
+  max_idle_conns: 16
