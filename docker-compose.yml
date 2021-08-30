@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  database:
+    image: vnch/url_shortener_db:latest
+    container_name: pg_db
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+
+  server:
+    image: vnch/url_shortener_server:latest
+    container_name: urls_server
+    command: [ "/url/urls_server", "--config", "config.yml" ]
+    volumes:
+      - ./configs/config.yml:/url/config.yml
+    ports:
+      - "9876:9876"
+    depends_on:
+      - database
