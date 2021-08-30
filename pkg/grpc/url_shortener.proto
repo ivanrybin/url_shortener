@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "grpc/pkg/grpc";
+
+package grpc;
+
+service URLShortener {
+  // shorts original URL and returns shorted URL
+  rpc Create(CreateRequest) returns (CreateResponse) {};
+
+  // returns original URL from shorted one
+  rpc Get(GetRequest) returns (GetResponse) {};
+}
+
+message CreateRequest {
+  string original_url = 1;
+}
+
+message CreateResponse {
+  string short_url = 1;
+}
+
+message GetRequest {
+  string short_url = 1;
+}
+
+message GetResponse {
+  string original_url = 1;
+}
