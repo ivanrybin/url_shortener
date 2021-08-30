@@ -85,6 +85,8 @@ database:
 
 ```
 
+Database stores data in mounted directory `db/data`.
+
 ### Client
 
 Client has one flag `-a, --address` for server address in format `localhost:9876` (default is `:9876`).
