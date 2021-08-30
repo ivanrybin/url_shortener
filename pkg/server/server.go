@@ -53,12 +53,43 @@ func (s *Server) Create(ctx context.Context, req *pb.CreateRequest) (*pb.CreateR
 		return &pb.CreateResponse{}, status.Error(codes.Unknown, "cannot short empty URL")
 	}
 
+	// check not shorted
+	isShort, err := s.isShort(ctx, req.GetOriginalUrl())
+	if err != nil {
+		log.Debugf("create: short check failed for URL=%s: %v:", req.GetOriginalUrl(), err)
+		return &pb.CreateResponse{}, status.Error(codes.Unknown, "cannot short URL")
+	}
+	if isShort {
+		log.Debugf("create: already shortened URL=%s", req.GetOriginalUrl())
+		return &pb.CreateResponse{}, status.Error(codes.Unknown, "cannot short shortened URL")
+	}
+
 	shortURL, ok := s.lruOrigShort.Get(req.GetOriginalUrl())
 	if ok {
 		log.Debugf("create: original=%s short=%s (LRU)", req.GetOriginalUrl(), shortURL)
 		return &pb.CreateResponse{ShortUrl: shortURL.(string)}, nil
 	}
+
 	return s.create(ctx, req)
+}
+
+// isShort checks if URL is shorted one
+func (s *Server) isShort(ctx context.Context, url string) (bool, error) {
+	// check cache
+	_, ok := s.lruShortOrig.Get(url)
+	if ok {
+		return true, nil
+	}
+
+	// check db
+	_, err := s.db.GetOriginalURL(ctx, url)
+	if err != nil {
+		if errors.Is(err, &db.NoRowError{}) {
+			return false, nil
+		}
+		return false, fmt.Errorf("cannot check is URL short: %w", err)
+	}
+	return true, nil
 }
 
 // create adds new pair <original_url, short_url> to database
