@@ -32,10 +32,10 @@ Server daemon waits PostgreSQL initialization finish.
 ```bash
 # docker-compose log output after up command
 pg_db       | 2021-08-30 10:00:46.295 UTC [1] LOG:  database system is ready to accept connections
-url_shortener_server | time="10:00:47 2021-08-30" level=info msg="trying to connect to database #1"
-url_shortener_server | time="10:00:47 2021-08-30" level=info msg="database connection established"
-url_shortener_server | time="10:00:47 2021-08-30" level=info msg="daemon started"
-url_shortener_server | time="10:00:47 2021-08-30" level=info msg="listening :9876"
+urls_server | time="10:00:47 2021-08-30" level=info msg="trying to connect to database #1"
+urls_server | time="10:00:47 2021-08-30" level=info msg="database connection established"
+urls_server | time="10:00:47 2021-08-30" level=info msg="daemon started"
+urls_server | time="10:00:47 2021-08-30" level=info msg="listening :9876"
 ```
 
 After successful deployment you can request service by default port `9876` with gRPC client.
