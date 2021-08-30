@@ -1,0 +1,17 @@
+FROM golang:1.16
+
+WORKDIR /url
+
+ENV LOG_LEVEL debug
+
+COPY pkg /url/pkg
+COPY cmd /url/cmd
+COPY go.mod /url/go.mod
+COPY go.sum /url/go.sum
+COPY build_server.sh /url/build_server.sh
+COPY configs/config.yml /url/config.yml
+
+RUN ["chmod", "+x", "/url/build_server.sh"]
+RUN ["/url/build_server.sh"]
+
+RUN ["chmod", "+x", "/url/urls_server"]
