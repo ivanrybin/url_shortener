@@ -34,7 +34,7 @@ func New(ctx context.Context, cfg config.Config) (*Daemon, error) {
 	d := &Daemon{cfg: cfg}
 	var err error
 
-	if ctx == nil {
+	if ctx != nil {
 		d.ctx, d.cancel = context.WithCancel(ctx)
 	} else {
 		d.ctx, d.cancel = context.WithCancel(context.Background())
