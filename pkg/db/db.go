@@ -51,7 +51,7 @@ func New(ctx context.Context, cfg config.DBConfig) (ShortenerDB, error) {
 	for i := 1; i <= cfg.ConnTriesCnt; i++ {
 		log.Printf("trying to connect to database #%d", i)
 		if connErr = sdb.db.PingContext(ctx); connErr != nil {
-			<-time.After(time.Duration(cfg.ConnTriesCnt) * time.Second)
+			<-time.After(time.Duration(cfg.ConnTryTime) * time.Second)
 		} else {
 			log.Print("database connection established")
 			break
