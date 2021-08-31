@@ -29,7 +29,7 @@ func main() {
 	log.SetFormatter(&log.TextFormatter{FullTimestamp: true, TimestampFormat: "15:04:05 2006-01-02"})
 	log.SetOutput(os.Stderr)
 
-	// db configs
+	// config
 	cfg, err := config.Load(daemonCfg)
 	if err != nil {
 		log.Fatalf("cannot load config file: %v", err)
